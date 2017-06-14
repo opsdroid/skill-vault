@@ -36,6 +36,7 @@ async def seal_the_vault(opsdroid, config, message):
 @match_regex(r'.*(seal|vault).*(status|sealed).*')
 async def seal_status(opsdroid, config, message):
     announce_unsealed = True
+    announce_sealed = config.get("announce-sealed", True)
     if message is None:
         announce_unsealed = config.get("announce-unsealed", False)
         message = Message("",
@@ -51,7 +52,7 @@ async def seal_status(opsdroid, config, message):
     async with aiohttp.ClientSession() as session:
         async with session.get(status_url) as resp:
             status = await resp.json()
-            if status["sealed"]:
+            if status["sealed"] and announce_sealed:
                 await message.respond("The vault is sealed.")
-            elif announce_unsealed:
+            if not status["sealed"] and announce_unsealed:
                 await message.respond("The vault is not sealed.")

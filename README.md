@@ -15,6 +15,7 @@ An instance of Vault.
   vault-token: aabbccddee1122334455
   # Optional
   announce-on-seal: true  # Announce the vault status in the default room on seal
+  announce-sealed: true  # Announce the vault is sealed hourly
   announce-unsealed: false  # Announce the vault is unsealed hourly
 ```
 
