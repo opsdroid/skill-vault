@@ -5,7 +5,7 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to interact with [H
 ## Requirements
 
 * An instance of Vault to interact with.
-* A token with seal permissions.
+* A token with seal permissions (Pro Tip: create a [seal only role](https://www.jacobtomlinson.co.uk/security/2017/06/14/seal-only-token-hashicorp-vault/) just for opsdroid).
 
 ## Configuration
 
