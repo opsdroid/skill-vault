@@ -31,6 +31,32 @@ async def seal_the_vault(opsdroid, config, message):
             else:
                 await message.respond("Something unusual happened, the vault probably isn't sealed.")
 
+@match_regex(r".*renew.*vault.*token.*")
+@match_crontab('0 * * * *')
+async def check_token(opsdroid, config, message):
+    vault_url = config.get('vault-url', None)
+    vault_token = config.get('vault-token', None)
+    if vault_url is None or vault_token is None:
+        await message.respond("No vault url and/or token has been specified in the config.")
+        return
+    if message is None:
+        message = Message("",
+                          None,
+                          config.get("room", opsdroid.default_connector.default_room),
+                          opsdroid.default_connector)
+    seal_url = "{}/v1/auth/token/renew-self".format(vault_url)
+    seal_headers = {'X-Vault-Token': vault_token}
+    async with aiohttp.ClientSession() as session:
+        async with session.put(seal_url, headers=seal_headers) as resp:
+            if resp.status == 200:
+                _LOGGER.info("Successfully renewed vault token")
+            elif resp.status == 403:
+                await message.respond("I cannot renew my token, it has probably expired.")
+            else:
+                await message.respond("Something unusual happened when renewing my vault token, see the log.")
+                _LOGGER.error(await resp.text())
+                _LOGGER.error(resp.status)
+
 
 @match_crontab('0 * * * *')
 @match_regex(r'.*(seal|vault).*(status|sealed).*')
