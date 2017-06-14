@@ -1,32 +1,42 @@
-# opsdroid skill hello
+# opsdroid skill vault
 
-A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to respond to hello and goodbye messages.
+A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to interact with [Hashicorp's Vault](https://www.vaultproject.io).
 
 ## Requirements
 
-None.
+An instance of Vault.
 
 ## Configuration
 
-None.
+```yaml
+- name: vault
+  # Required
+  vault-url: https://vault.example.com:8443
+  vault-token: aabbccddee1122334455
+  # Optional
+  announce-on-seal: true  # Announce the vault status in the default room on seal
+  announce-unsealed: false  # Announce the vault is unsealed hourly
+```
 
 ## Usage
 
-#### `hello`
+#### `is the vault sealed?`
 
-Says hello to the user.
+Checks if the vault is sealed.
 
-> user: hello
+> user: is the vault sealed?
 >
-> opsdroid: Hi user
+> opsdroid: The vault is not sealed.
 
-#### `goodbye`
+#### `seal the vault!!!!1!`
 
-Says goodbye to the user.
+Seals the vault.
 
-> user: bye
+> user: please seal the vault
 >
-> opsdroid: Bye user
+> opsdroid: I sealed the vault.
+>
+> opsdroid (in default room): The vault is sealed.
 
 ## License
 
