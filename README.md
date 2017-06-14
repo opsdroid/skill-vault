@@ -4,7 +4,8 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to interact with [H
 
 ## Requirements
 
-An instance of Vault.
+* An instance of Vault to interact with.
+* A token with seal permissions.
 
 ## Configuration
 
