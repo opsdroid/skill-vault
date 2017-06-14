@@ -35,9 +35,9 @@ async def seal_the_vault(opsdroid, config, message):
 @match_crontab('0 * * * *')
 @match_regex(r'.*(seal|vault).*(status|sealed).*')
 async def seal_status(opsdroid, config, message):
-    announce_unsealed = True
-    announce_sealed = config.get("announce-sealed", True)
+    announce_sealed, announce_unsealed = True, True
     if message is None:
+        announce_sealed = config.get("announce-sealed", True)
         announce_unsealed = config.get("announce-unsealed", False)
         message = Message("",
                           None,
