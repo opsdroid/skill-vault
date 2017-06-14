@@ -29,11 +29,11 @@ Checks if the vault is sealed.
 >
 > opsdroid: The vault is not sealed.
 
-#### `seal the vault!!!!1!`
+#### `seal the vault`
 
 Seals the vault.
 
-> user: please seal the vault
+> user: please seal the vault!!!!1!
 >
 > opsdroid: I sealed the vault.
 >
