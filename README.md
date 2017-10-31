@@ -39,7 +39,3 @@ Seals the vault.
 > opsdroid: I sealed the vault.
 >
 > opsdroid (in default room): The vault is sealed.
-
-## License
-
-GNU General Public License Version 3 (GPLv3)
